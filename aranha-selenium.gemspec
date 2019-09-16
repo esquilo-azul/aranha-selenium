@@ -11,4 +11,6 @@ Gem::Specification.new do |s|
   s.summary     = 'Selenium\' utilities for Ruby.'
 
   s.files = Dir['{lib}/**/*', 'Gemfile']
+
+  s.add_dependency 'activesupport'
 end
