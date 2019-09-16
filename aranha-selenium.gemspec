@@ -13,4 +13,5 @@ Gem::Specification.new do |s|
   s.files = Dir['{lib}/**/*', 'Gemfile']
 
   s.add_dependency 'activesupport'
+  s.add_dependency 'selenium-webdriver', '~> 3.142', '>= 3.142.3'
 end
