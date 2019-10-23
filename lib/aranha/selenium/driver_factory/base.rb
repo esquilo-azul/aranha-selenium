@@ -12,7 +12,7 @@ module Aranha
         DEFAULT_HEADLESS = false
 
         class << self
-          attr_writer:default_accept_insecure_certs, :default_downloads_dir, :default_headless
+          attr_writer :default_accept_insecure_certs, :default_downloads_dir, :default_headless
 
           def default_downloads_dir
             @default_downloads_dir || DEFAULT_DOWNLOADS_DIR
