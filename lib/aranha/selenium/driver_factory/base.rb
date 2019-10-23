@@ -10,9 +10,11 @@ module Aranha
         DEFAULT_DOWNLOADS_DIR = ::File.join(::Dir.tmpdir, 'aranha_downloads_dir')
         DEFAULT_ACCEPT_INSECURE_CERTS = false
         DEFAULT_HEADLESS = false
+        DEFAULT_USER_AGENT = nil
 
         class << self
-          attr_writer :default_accept_insecure_certs, :default_downloads_dir, :default_headless
+          attr_writer :default_accept_insecure_certs, :default_downloads_dir, :default_headless,
+                      :default_user_agent
 
           def default_downloads_dir
             @default_downloads_dir || DEFAULT_DOWNLOADS_DIR
@@ -24,6 +26,10 @@ module Aranha
 
           def default_headless
             @default_headless || DEFAULT_HEADLESS
+          end
+
+          def default_user_agent
+            @default_user_agent || DEFAULT_USER_AGENT
           end
         end
 
@@ -50,7 +56,7 @@ module Aranha
         end
 
         def user_agent
-          options.fetch(:user_agent)
+          option_value(:user_agent)
         end
 
         private
