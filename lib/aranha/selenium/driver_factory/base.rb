@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
+require 'active_support/json'
 require 'active_support/core_ext/hash/indifferent_access'
+require 'selenium-webdriver'
 require 'tmpdir'
 
 module Aranha

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'selenium-webdriver'
 require 'aranha/selenium/driver_factory/base'
 
 module Aranha
