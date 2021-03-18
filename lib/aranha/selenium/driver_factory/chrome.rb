@@ -14,12 +14,16 @@ module Aranha
 
         def chrome_options
           r = ::Selenium::WebDriver::Chrome::Options.new
-          r.add_argument('--ignore-certificate-errors') if accept_insecure_certs?
-          r.add_argument('--headless') if headless?
-          r.add_argument('--disable-popup-blocking')
-          r.add_argument('--disable-translate')
-          r.add_argument("user-agent=#{user_agent}") if user_agent.present?
+          chrome_arguments.each { |arg| r.add_argument(arg) }
           r.add_preference(:download, prompt_for_download: false, default_directory: downloads_dir)
+          r
+        end
+
+        def chrome_arguments
+          r = %w[--disable-popup-blocking --disable-translate]
+          r << '--ignore-certificate-errors' if accept_insecure_certs?
+          r << '--headless' if headless?
+          r << "--user-agent=#{user_agent}" if user_agent.present?
           r
         end
       end
