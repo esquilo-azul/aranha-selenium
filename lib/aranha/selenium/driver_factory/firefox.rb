@@ -9,10 +9,7 @@ module Aranha
         def build
           ::Selenium::WebDriver.for(
             :firefox,
-            options: ::Selenium::WebDriver::Firefox::Options.new(
-              profile: build_profile,
-              args: build_args
-            ),
+            options: build_options,
             desired_capabilities: build_capabilities
           )
         end
@@ -31,6 +28,10 @@ module Aranha
           else
             ::Selenium::WebDriver::Remote::Capabilities.firefox
           end
+        end
+
+        def build_options
+          ::Selenium::WebDriver::Firefox::Options.new(args: build_args, profile: build_profile)
         end
 
         def build_profile
