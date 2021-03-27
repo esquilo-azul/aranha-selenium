@@ -21,7 +21,7 @@ module Aranha
 
         def build_args
           r = []
-          r << '-headless' if headless?
+          r << '--headless' if headless?
           r
         end
 
