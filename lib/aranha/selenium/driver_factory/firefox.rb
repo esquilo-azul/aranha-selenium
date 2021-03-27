@@ -31,15 +31,16 @@ module Aranha
         end
 
         def build_options
-          ::Selenium::WebDriver::Firefox::Options.new(args: build_args, profile: build_profile)
+          ::Selenium::WebDriver::Firefox::Options.new(args: build_args, prefs: build_preferences)
         end
 
-        def build_profile
-          r = ::Selenium::WebDriver::Firefox::Profile.new
-          r['browser.download.dir'] = downloads_dir
-          r['browser.download.folderList'] = 2
-          r['browser.helperApps.neverAsk.saveToDisk'] = auto_download_mime_types.join(';')
-          r['pdfjs.disabled'] = true
+        def build_preferences
+          r = {
+            'browser.download.dir' => downloads_dir,
+            'browser.download.folderList' => 2,
+            'browser.helperApps.neverAsk.saveToDisk' => auto_download_mime_types.join(';'),
+            'pdfjs.disabled' => true
+          }
           r['general.useragent.override'] = user_agent if user_agent.present?
           r
         end
