@@ -57,6 +57,10 @@ module Aranha
           option_value(:headless)
         end
 
+        def profile_dir
+          options[:profile_dir].to_s
+        end
+
         def user_agent
           option_value(:user_agent)
         end

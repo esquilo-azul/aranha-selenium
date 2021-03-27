@@ -31,7 +31,10 @@ module Aranha
         end
 
         def build_options
-          ::Selenium::WebDriver::Firefox::Options.new(args: build_args, prefs: build_preferences)
+          r = ::Selenium::WebDriver::Firefox::Options.new(args: build_args,
+                                                          prefs: build_preferences)
+          build_profile.if_present { |v| r.profile = v }
+          r
         end
 
         def build_preferences
@@ -43,6 +46,13 @@ module Aranha
           }
           r['general.useragent.override'] = user_agent if user_agent.present?
           r
+        end
+
+        def build_profile
+          return nil if profile_dir.blank?
+
+          ::FileUtils.mkdir_p(profile_dir)
+          ::Selenium::WebDriver::Firefox::Profile.new(profile_dir)
         end
 
         def auto_download_mime_types

@@ -24,6 +24,7 @@ module Aranha
           r << '--ignore-certificate-errors' if accept_insecure_certs?
           r << '--headless' if headless?
           r << "--user-agent=#{user_agent}" if user_agent.present?
+          r << "--user-data-dir=#{profile_dir}" if profile_dir.present?
           r
         end
       end
