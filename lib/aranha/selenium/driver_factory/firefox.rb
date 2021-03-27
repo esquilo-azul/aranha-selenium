@@ -49,10 +49,12 @@ module Aranha
         end
 
         def build_profile
-          return nil if profile_dir.blank?
-
-          ::FileUtils.mkdir_p(profile_dir)
-          ::Selenium::WebDriver::Firefox::Profile.new(profile_dir)
+          if profile_name.present?
+            ::Selenium::WebDriver::Firefox::Profile.from_name(v)
+          elsif profile_dir.present?
+            ::FileUtils.mkdir_p(profile_dir)
+            ::Selenium::WebDriver::Firefox::Profile.new(profile_dir)
+          end
         end
 
         def auto_download_mime_types

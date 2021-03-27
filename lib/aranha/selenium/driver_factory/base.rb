@@ -61,6 +61,10 @@ module Aranha
           options[:profile_dir].to_s
         end
 
+        def profile_name
+          options[:profile_name]
+        end
+
         def user_agent
           option_value(:user_agent)
         end
