@@ -15,5 +15,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'activesupport'
   s.add_dependency 'selenium-webdriver', '~> 3.142', '>= 3.142.3'
 
-  s.add_development_dependency 'eac_ruby_gem_support', '~> 0.1', '>= 0.1.1'
+  s.add_development_dependency 'eac_ruby_gem_support', '~> 0.2'
 end
