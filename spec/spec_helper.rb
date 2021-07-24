@@ -10,4 +10,7 @@ RSpec.configure do |config|
   end
 
   config.shared_context_metadata_behavior = :apply_to_host_groups
+
+  require 'eac_ruby_gem_support/rspec'
+  ::EacRubyGemSupport::Rspec.setup(::File.expand_path('..', __dir__), config)
 end
