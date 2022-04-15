@@ -50,7 +50,7 @@ module Aranha
 
         def build_profile
           if profile_name.present?
-            ::Selenium::WebDriver::Firefox::Profile.from_name(v)
+            ::Selenium::WebDriver::Firefox::Profile.from_name(profile_name)
           elsif profile_dir.present?
             ::FileUtils.mkdir_p(profile_dir)
             ::Selenium::WebDriver::Firefox::Profile.new(profile_dir)
