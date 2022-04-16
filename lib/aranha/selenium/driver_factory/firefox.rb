@@ -23,11 +23,9 @@ module Aranha
         end
 
         def build_capabilities
-          if accept_insecure_certs?
-            ::Selenium::WebDriver::Remote::Capabilities.firefox(accept_insecure_certs: true)
-          else
-            ::Selenium::WebDriver::Remote::Capabilities.firefox
-          end
+          caps = {}
+          caps[:accept_insecure_certs] = true if accept_insecure_certs?
+          ::Selenium::WebDriver::Remote::Capabilities.firefox(caps)
         end
 
         def build_options
