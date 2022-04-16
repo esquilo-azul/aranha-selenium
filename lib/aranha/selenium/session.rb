@@ -51,6 +51,13 @@ module Aranha
         new_downloads.first
       end
 
+      def wait_for_url_change(&block)
+        previous_url = current_url
+        block&.call
+
+        wait.until { current_url != previous_url }
+      end
+
       def current_source
         element = find_element(xpath: '/html[1]')
         raise 'Root element not found' unless element
