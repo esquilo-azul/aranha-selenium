@@ -5,6 +5,7 @@ require 'aranha/selenium/driver_factory'
 module Aranha
   module Selenium
     class Session < ::SimpleDelegator
+      require_sub __FILE__
       attr_reader :downloads, :wait
 
       def initialize(options = {})
@@ -78,18 +79,6 @@ module Aranha
 
         s = element.attribute('innerHTML')
         "<html>\n#{s}\n</html>\n"
-      end
-
-      class Downloads
-        attr_reader :dir
-
-        def initialize
-          @dir = ::Dir.mktmpdir
-        end
-
-        def current
-          Dir.glob("#{dir}/**/*")
-        end
       end
 
       private
