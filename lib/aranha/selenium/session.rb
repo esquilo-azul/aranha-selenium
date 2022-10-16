@@ -5,7 +5,7 @@ require 'aranha/selenium/driver_factory'
 module Aranha
   module Selenium
     class Session < ::SimpleDelegator
-      require_sub __FILE__
+      require_sub __FILE__, include_modules: true
       attr_reader :downloads, :wait
 
       def initialize(options = {})
@@ -16,18 +16,6 @@ module Aranha
             options.merge(download_dir: @downloads.dir)
           )
         )
-      end
-
-      # @return [Selenium::WebDriver::Element, nil]
-      def find_element(*args, &block)
-        return args.first if args.count >= 1 && args.first.is_a?(::Selenium::WebDriver::Element)
-
-        __getobj__.find_element(*args, &block)
-      end
-
-      def find_or_not_element(find_element_args)
-        r = find_elements(find_element_args)
-        r.any? ? r.first : nil
       end
 
       def select_option(field, value, *find_element_args)
