@@ -33,7 +33,8 @@ module Aranha
         element.click
         element
       rescue ::Selenium::WebDriver::Error::ElementClickInterceptedError,
-             ::Selenium::WebDriver::Error::ElementNotInteractableError
+             ::Selenium::WebDriver::Error::ElementNotInteractableError,
+             ::Selenium::WebDriver::Error::StaleElementReferenceError
         nil
       end
     end
