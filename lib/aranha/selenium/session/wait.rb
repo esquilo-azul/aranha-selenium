@@ -4,6 +4,12 @@ module Aranha
   module Selenium
     class Session < ::SimpleDelegator
       module Wait
+        WAIT_DEFAULT_TIMEOUT = 15
+
+        def wait_default_timeout
+          WAIT_DEFAULT_TIMEOUT
+        end
+
         def wait_for_click(find_element_args)
           wait.until do
             element = find_element(find_element_args)
@@ -36,7 +42,7 @@ module Aranha
         private
 
         def wait_uncached
-          ::Selenium::WebDriver::Wait.new(timeout: 15)
+          ::Selenium::WebDriver::Wait.new(timeout: wait_default_timeout)
         end
       end
     end
