@@ -6,6 +6,11 @@ module Aranha
       module Wait
         WAIT_DEFAULT_TIMEOUT = 15
 
+        def wait(timeout = nil)
+          timeout ||= wait_default_timeout
+          ::Selenium::WebDriver::Wait.new(timeout: timeout)
+        end
+
         def wait_default_timeout
           WAIT_DEFAULT_TIMEOUT
         end
@@ -37,12 +42,6 @@ module Aranha
           block&.call
 
           wait.until { current_url != previous_url }
-        end
-
-        private
-
-        def wait_uncached
-          ::Selenium::WebDriver::Wait.new(timeout: wait_default_timeout)
         end
       end
     end
