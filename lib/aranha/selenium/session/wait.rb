@@ -15,8 +15,8 @@ module Aranha
           WAIT_DEFAULT_TIMEOUT
         end
 
-        def wait_for_click(find_element_args)
-          wait.until do
+        def wait_for_click(find_element_args, timeout = nil)
+          wait(timeout).until do
             element = find_element(find_element_args)
             element ? element_click(element) : nil
           end
