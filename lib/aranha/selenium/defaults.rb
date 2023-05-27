@@ -13,24 +13,21 @@ module Aranha
       DEFAULT_HEADLESS = false
       DEFAULT_USER_AGENT = nil
 
-      attr_writer :accept_insecure_certs, :downloads_dir, :headless,
-                  :user_agent
-
-      def downloads_dir
-        @downloads_dir || DEFAULT_DOWNLOADS_DIR
+      %w[accept_insecure_certs downloads_dir headless user_agent].each do |key|
+        define_method(key) { send("#{key}_option").value }
+        define_method("#{key}=") { |user_value| send("#{key}_option").user_value = user_value }
+        define_method("#{key}_option") do
+          options[key] ||= ::Aranha::Selenium::Defaults::Option.new(self, key)
+        end
       end
 
-      def accept_insecure_certs
-        @accept_insecure_certs || DEFAULT_ACCEPT_INSECURE_CERTS
+      private
+
+      def options
+        @options ||= {}
       end
 
-      def headless
-        @headless || DEFAULT_HEADLESS
-      end
-
-      def user_agent
-        @user_agent || DEFAULT_USER_AGENT
-      end
+      require_sub __FILE__
     end
   end
 end
