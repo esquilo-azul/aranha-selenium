@@ -33,10 +33,8 @@ module Aranha
           end
         end
 
-        attr_reader :options
-
-        def initialize(options)
-          @options = options.with_indifferent_access.freeze
+        common_constructor :options do
+          self.options = options.with_indifferent_access.freeze
         end
 
         def build
