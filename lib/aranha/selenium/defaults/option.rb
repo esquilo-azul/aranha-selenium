@@ -7,7 +7,7 @@ module Aranha
   module Selenium
     class Defaults
       class Option
-        common_constructor :owner, :key do
+        common_constructor :owner, :key, :sanitizer, default: [nil] do
           self.key = key.to_sym
         end
         attr_accessor :user_value
@@ -24,9 +24,18 @@ module Aranha
 
         # @return [Object]
         def value
-          return user_value unless user_value.nil?
+          sanitized_value do
+            next user_value unless user_value.nil?
 
-          default_value
+            default_value
+          end
+        end
+
+        private
+
+        def sanitized_value(&block)
+          r = block.call
+          sanitizer.present? ? sanitizer.call(r) : r
         end
       end
     end
