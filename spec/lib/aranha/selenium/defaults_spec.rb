@@ -10,7 +10,7 @@ require 'aranha/selenium/defaults'
 
     context 'when user value is set' do
       before do
-        instance.headless = true
+        instance.headless = 'true'
       end
 
       it { expect(instance.headless).to eq(true) }

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'eac_ruby_utils/boolean'
 require 'eac_ruby_utils/core_ext'
 require 'tmpdir'
 
@@ -19,6 +20,13 @@ module Aranha
         define_method("#{key}_option") do
           options[key] ||= ::Aranha::Selenium::Defaults::Option.new(self, key)
         end
+      end
+
+      # @return [Aranha::Selenium::Defaults::Option]
+      def headless_option
+        options['headless'] ||= ::Aranha::Selenium::Defaults::Option.new(
+          self, 'headless', ->(v) { ::EacRubyUtils::Boolean.parse(v) }
+        )
       end
 
       private
