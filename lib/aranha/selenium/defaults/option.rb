@@ -22,9 +22,15 @@ module Aranha
           owner.class.const_get(constant_name)
         end
 
+        # @return [String]
+        def envvar_name
+          "aranha_selenium_#{key}".upcase
+        end
+
         # @return [Object]
         def value
           sanitized_value do
+            next ENV.fetch(envvar_name) if ENV.key?(envvar_name)
             next user_value unless user_value.nil?
 
             default_value
