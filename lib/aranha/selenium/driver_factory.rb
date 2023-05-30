@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
-require 'active_support/core_ext/hash/indifferent_access'
-require 'aranha/selenium/driver_factory/base'
-require 'aranha/selenium/driver_factory/chrome'
-require 'aranha/selenium/driver_factory/firefox'
+require 'eac_ruby_utils/core_ext'
 
 module Aranha
   module Selenium
@@ -42,6 +39,8 @@ module Aranha
       def driver_options
         options.except(:driver)
       end
+
+      require_sub __FILE__
     end
   end
 end
