@@ -2,6 +2,7 @@
 
 require 'aranha/selenium/driver_factory'
 require 'eac_ruby_utils/core_ext'
+require 'selenium-webdriver'
 
 module Aranha
   module Selenium

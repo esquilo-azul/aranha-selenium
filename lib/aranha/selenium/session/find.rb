@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'selenium-webdriver'
+
 module Aranha
   module Selenium
     class Session < ::SimpleDelegator
