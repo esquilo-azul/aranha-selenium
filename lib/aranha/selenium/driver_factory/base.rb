@@ -28,7 +28,7 @@ module Aranha
         end
 
         def profile_dir
-          options[:profile_dir].to_s
+          option_value(:profile_dir)
         end
 
         def profile_name
