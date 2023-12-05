@@ -2,7 +2,7 @@
 
 require 'aranha/selenium/defaults'
 
-::RSpec.describe ::Aranha::Selenium::Defaults do
+RSpec.describe Aranha::Selenium::Defaults do
   let(:instance) { described_class.instance }
 
   describe '#headless' do

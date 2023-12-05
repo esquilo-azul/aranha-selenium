@@ -6,7 +6,7 @@ require 'aranha/selenium/version'
 
 Gem::Specification.new do |s|
   s.name        = 'aranha-selenium'
-  s.version     = ::Aranha::Selenium::VERSION
+  s.version     = Aranha::Selenium::VERSION
   s.authors     = ['Esquilo Azul Company']
   s.summary     = 'Selenium\' utilities for Ruby.'
 
