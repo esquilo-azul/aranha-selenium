@@ -29,7 +29,7 @@ module Aranha
         Aranha::Selenium::DriverFactory.const_get(driver_name.classify)
       rescue NameError
         raise "Unknown Aranha Selenium driver: \"#{driver_name}\" " \
-          "(Class \"Aranha::Selenium::DriverFactory::#{driver_name.classify}\" not found)"
+              "(Class \"Aranha::Selenium::DriverFactory::#{driver_name.classify}\" not found)"
       end
 
       def default_driver_name
