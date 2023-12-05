@@ -6,14 +6,13 @@ module Aranha
   module Selenium
     class Session < ::SimpleDelegator
       class Downloads
-        attr_reader :dir
-
-        def initialize
-          @dir = ::Dir.mktmpdir
-        end
-
         def current
           Dir.glob("#{dir}/**/*")
+        end
+
+        # @return [String]
+        def dir
+          @dir ||= ::Dir.mktmpdir
         end
       end
     end
