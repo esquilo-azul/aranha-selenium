@@ -9,13 +9,11 @@ module Aranha
     class Session < ::SimpleDelegator
       require_sub __FILE__, include_modules: true
       enable_simple_cache
-      attr_reader :downloads
 
       def initialize(options = {})
-        @downloads = Downloads.new
         super(
           ::Aranha::Selenium::DriverFactory.create_driver(
-            options.merge(download_dir: @downloads.dir)
+            options.merge(download_dir: downloads.dir)
           )
         )
       end
@@ -26,6 +24,11 @@ module Aranha
 
         s = element.attribute('innerHTML')
         "<html>\n#{s}\n</html>\n"
+      end
+
+      # @return [Aranha::Selenium::Session::Downloads]
+      def downloads
+        @downloads ||= ::Aranha::Selenium::Session::Downloads.new
       end
 
       private
