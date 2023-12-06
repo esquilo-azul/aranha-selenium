@@ -7,8 +7,13 @@ module Aranha
   module Selenium
     class DriverFactory
       class Base
+        # @!attribute [r] options
+        #   @return [Aranha::Selenium::DriverOptions]
+
+        # @!method initialize(options)
+        #   @param options [Aranha::Selenium::DriverOptions]
         common_constructor :options do
-          self.options = options.with_indifferent_access.freeze
+          self.options = ::Aranha::Selenium::DriverOptions.assert(options)
         end
 
         def build
@@ -20,17 +25,7 @@ module Aranha
           method_name = "#{method_name}?" if ::Aranha::Selenium::DriverOptions::BOOLEAN_OPTIONS
                                                .include?(option_key)
           define_method method_name do
-            option_value(option_key)
-          end
-        end
-
-        private
-
-        def option_value(key)
-          if options.key?(key)
-            options.fetch(key)
-          else
-            ::Aranha::Selenium::DriverOptions.instance.send(key)
+            options.send(method_name)
           end
         end
       end
