@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
 
   s.files = Dir['{lib}/**/*', 'Gemfile']
 
+  s.add_dependency 'eac_fs', '~> 0.17'
   s.add_dependency 'eac_ruby_utils', '~> 0.120'
   s.add_dependency 'selenium-webdriver', '~> 3.142', '>= 3.142.7'
 
