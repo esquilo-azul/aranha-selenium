@@ -27,7 +27,7 @@ RSpec.describe Aranha::Selenium::Session::Downloads do
       end
 
       it do
-        expect(instance.current).to include(file_path)
+        expect(instance.current).not_to include(file_path)
       end
     end
   end

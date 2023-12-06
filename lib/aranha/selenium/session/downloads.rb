@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'eac_fs/file_info'
 require 'eac_ruby_utils/core_ext'
 require 'tmpdir'
 
@@ -9,7 +10,11 @@ module Aranha
       class Downloads
         # @return [Enumerable<Pathname>]
         def current
-          dir.glob('**/*')
+          dir.glob('**/*').select do |path|
+            !::EacFs::FileInfo.new(path).open? && path.size.positive?
+          rescue Errno::ENOENT
+            false
+          end
         end
 
         # @return [Pathname]
