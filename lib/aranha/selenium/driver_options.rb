@@ -9,6 +9,14 @@ module Aranha
     class DriverOptions
       class << self
         # @return [Aranha::Selenium::DriverOptions]
+        # @param [Aranha::Selenium::DriverOptions, Hash]
+        def assert(source)
+          return source if source.is_a?(self)
+
+          new(source)
+        end
+
+        # @return [Aranha::Selenium::DriverOptions]
         def instance
           @instance ||= new
         end
