@@ -15,28 +15,13 @@ module Aranha
           raise 'Must be overrided'
         end
 
-        def downloads_dir
-          option_value(:downloads_dir)
-        end
-
-        def accept_insecure_certs?
-          option_value(:accept_insecure_certs)
-        end
-
-        def headless?
-          option_value(:headless)
-        end
-
-        def profile_dir
-          option_value(:profile_dir)
-        end
-
-        def profile_name
-          options[:profile_name]
-        end
-
-        def user_agent
-          option_value(:user_agent)
+        ::Aranha::Selenium::DriverOptions.lists.option.each_value do |option_key|
+          method_name = option_key.to_s
+          method_name = "#{method_name}?" if ::Aranha::Selenium::DriverOptions::BOOLEAN_OPTIONS
+                                               .include?(option_key)
+          define_method method_name do
+            option_value(option_key)
+          end
         end
 
         private
