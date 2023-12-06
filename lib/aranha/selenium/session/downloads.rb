@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'eac_ruby_utils/core_ext'
 require 'tmpdir'
 
 module Aranha
@@ -10,9 +11,9 @@ module Aranha
           Dir.glob("#{dir}/**/*")
         end
 
-        # @return [String]
+        # @return [Pathname]
         def dir
-          @dir ||= ::Dir.mktmpdir
+          @dir ||= ::Dir.mktmpdir.to_pathname
         end
       end
     end
