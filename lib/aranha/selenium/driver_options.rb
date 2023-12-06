@@ -25,6 +25,11 @@ module Aranha
       DEFAULT_PROFILE_DIR = nil
       DEFAULT_USER_AGENT = nil
 
+      # @param user_values [Hash]
+      def initialize(user_values = {})
+        user_values.each { |k, v| send("#{k}=", v) }
+      end
+
       lists.option.each_value do |key|
         define_method(key) { send("#{key}_option").value }
         define_method("#{key}=") { |user_value| send("#{key}_option").user_value = user_value }
