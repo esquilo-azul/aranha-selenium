@@ -15,7 +15,7 @@ module Aranha
       end
 
       enable_listable
-      lists.add_string :option, :accept_insecure_certs, :downloads_dir, :headless, :profile_dir,
+      lists.add_symbol :option, :accept_insecure_certs, :downloads_dir, :headless, :profile_dir,
                        :user_agent
 
       DEFAULT_DOWNLOADS_DIR = ::File.join(::Dir.tmpdir, 'aranha_downloads_dir')
