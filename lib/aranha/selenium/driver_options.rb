@@ -30,8 +30,10 @@ module Aranha
         define_method("#{key}=") { |user_value| send("#{key}_option").user_value = user_value }
 
         option_proc = nil
-        option_proc = proc { |v| ::EacRubyUtils::Boolean.parse(v) } if
-          BOOLEAN_OPTIONS.include?(key)
+        if BOOLEAN_OPTIONS.include?(key)
+          option_proc = proc { |v| ::EacRubyUtils::Boolean.parse(v) }
+          define_method("#{key}?") { send(key) }
+        end
 
         define_method("#{key}_option") do
           options[key] ||= ::Aranha::Selenium::DriverOptions::Option.new(self, key, option_proc)
