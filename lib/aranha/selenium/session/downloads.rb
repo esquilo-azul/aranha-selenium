@@ -7,8 +7,9 @@ module Aranha
   module Selenium
     class Session < ::SimpleDelegator
       class Downloads
+        # @return [Enumerable<Pathname>]
         def current
-          Dir.glob("#{dir}/**/*")
+          dir.glob('**/*')
         end
 
         # @return [Pathname]

@@ -4,7 +4,7 @@ require 'aranha/selenium/session/downloads'
 
 RSpec.describe Aranha::Selenium::Session::Downloads do
   let(:instance) { described_class.new }
-  let(:file_path) { File.join(instance.dir, 'stub_file') }
+  let(:file_path) { instance.dir.join('stub_file') }
 
   it do
     expect(instance.current).not_to include(file_path)
