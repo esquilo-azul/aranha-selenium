@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'aranha/selenium/driver_options'
 require 'aranha/selenium/driver_factory'
 require 'eac_ruby_utils/core_ext'
 require 'selenium-webdriver'
@@ -13,7 +14,7 @@ module Aranha
       def initialize(options = {})
         super(
           ::Aranha::Selenium::DriverFactory.create_driver(
-            options.merge(download_dir: downloads.dir)
+            options.merge(::Aranha::Selenium::DriverOptions::OPTION_DOWNLOADS_DIR => downloads.dir)
           )
         )
       end
