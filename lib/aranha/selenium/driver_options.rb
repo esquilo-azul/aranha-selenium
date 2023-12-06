@@ -14,13 +14,17 @@ module Aranha
         end
       end
 
+      enable_listable
+      lists.add_string :option, :accept_insecure_certs, :downloads_dir, :headless, :profile_dir,
+                       :user_agent
+
       DEFAULT_DOWNLOADS_DIR = ::File.join(::Dir.tmpdir, 'aranha_downloads_dir')
       DEFAULT_ACCEPT_INSECURE_CERTS = false
       DEFAULT_HEADLESS = false
       DEFAULT_PROFILE_DIR = nil
       DEFAULT_USER_AGENT = nil
 
-      %w[accept_insecure_certs downloads_dir headless profile_dir user_agent].each do |key|
+      lists.option.each_value do |key|
         define_method(key) { send("#{key}_option").value }
         define_method("#{key}=") { |user_value| send("#{key}_option").user_value = user_value }
         define_method("#{key}_option") do
@@ -30,8 +34,8 @@ module Aranha
 
       # @return [Aranha::Selenium::DriverOptions::Option]
       def headless_option
-        options['headless'] ||= ::Aranha::Selenium::DriverOptions::Option.new(
-          self, 'headless', ->(v) { ::EacRubyUtils::Boolean.parse(v) }
+        options[OPTION_HEADLESS] ||= ::Aranha::Selenium::DriverOptions::Option.new(
+          self, OPTION_HEADLESS, ->(v) { ::EacRubyUtils::Boolean.parse(v) }
         )
       end
 
