@@ -7,7 +7,12 @@ require 'tmpdir'
 module Aranha
   module Selenium
     class DriverOptions
-      include ::Singleton
+      class << self
+        # @return [Aranha::Selenium::DriverOptions]
+        def instance
+          @instance ||= new
+        end
+      end
 
       DEFAULT_DOWNLOADS_DIR = ::File.join(::Dir.tmpdir, 'aranha_downloads_dir')
       DEFAULT_ACCEPT_INSECURE_CERTS = false
