@@ -40,6 +40,7 @@ module Aranha
           r = {
             'browser.download.dir' => downloads_dir,
             'browser.download.folderList' => 2,
+            'browser.download.start_downloads_in_tmp_dir' => true,
             'browser.helperApps.neverAsk.saveToDisk' => auto_download_mime_types.join(';'),
             'pdfjs.disabled' => true
           }
