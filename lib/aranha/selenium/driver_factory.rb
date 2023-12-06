@@ -11,10 +11,13 @@ module Aranha
         end
       end
 
-      attr_reader :options
+      # @!attribute [r] options
+      #   @return [ActiveSupport::HashWithIndifferentAccess]
 
-      def initialize(options)
-        @options = options.with_indifferent_access.freeze
+      # @!method initialize(options)
+      #   @param options [ActiveSupport::HashWithIndifferentAccess]
+      common_constructor :options do
+        self.options = options.with_indifferent_access.freeze
       end
 
       def create_driver
