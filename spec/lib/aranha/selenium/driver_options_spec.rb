@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'aranha/selenium/defaults'
+require 'aranha/selenium/driver_options'
 
-RSpec.describe Aranha::Selenium::Defaults do
+RSpec.describe Aranha::Selenium::DriverOptions do
   let(:instance) { described_class.instance }
 
   describe '#headless' do

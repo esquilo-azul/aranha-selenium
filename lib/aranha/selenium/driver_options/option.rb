@@ -5,7 +5,7 @@ require 'eac_ruby_utils/core_ext'
 
 module Aranha
   module Selenium
-    class Defaults
+    class DriverOptions
       class Option
         common_constructor :owner, :key, :sanitizer, default: [nil] do
           self.key = key.to_sym

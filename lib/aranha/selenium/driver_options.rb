@@ -6,7 +6,7 @@ require 'tmpdir'
 
 module Aranha
   module Selenium
-    class Defaults
+    class DriverOptions
       include ::Singleton
 
       DEFAULT_DOWNLOADS_DIR = ::File.join(::Dir.tmpdir, 'aranha_downloads_dir')
@@ -19,13 +19,13 @@ module Aranha
         define_method(key) { send("#{key}_option").value }
         define_method("#{key}=") { |user_value| send("#{key}_option").user_value = user_value }
         define_method("#{key}_option") do
-          options[key] ||= ::Aranha::Selenium::Defaults::Option.new(self, key)
+          options[key] ||= ::Aranha::Selenium::DriverOptions::Option.new(self, key)
         end
       end
 
-      # @return [Aranha::Selenium::Defaults::Option]
+      # @return [Aranha::Selenium::DriverOptions::Option]
       def headless_option
-        options['headless'] ||= ::Aranha::Selenium::Defaults::Option.new(
+        options['headless'] ||= ::Aranha::Selenium::DriverOptions::Option.new(
           self, 'headless', ->(v) { ::EacRubyUtils::Boolean.parse(v) }
         )
       end

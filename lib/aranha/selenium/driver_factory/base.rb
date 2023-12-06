@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'aranha/selenium/defaults'
+require 'aranha/selenium/driver_options'
 require 'eac_ruby_utils/core_ext'
 
 module Aranha
@@ -45,7 +45,7 @@ module Aranha
           if options.key?(key)
             options.fetch(key)
           else
-            ::Aranha::Selenium::Defaults.instance.send(key)
+            ::Aranha::Selenium::DriverOptions.instance.send(key)
           end
         end
       end
