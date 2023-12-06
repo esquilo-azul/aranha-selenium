@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'aranha/selenium/driver_options'
 require 'eac_ruby_utils/core_ext'
 
 module Aranha
@@ -39,8 +40,9 @@ module Aranha
         :firefox
       end
 
+      # @return [Aranha::Selenium::DriverOptions]
       def driver_options
-        options.except(:driver)
+        ::Aranha::Selenium::DriverOptions.assert(options.except(:driver))
       end
 
       require_sub __FILE__
