@@ -39,6 +39,8 @@ module Aranha
         user_values.each { |k, v| send("#{k}=", v) }
       end
 
+      compare_by :to_h
+
       lists.option.each_value do |key|
         define_method(key) { send("#{key}_option").value }
         define_method("#{key}=") { |user_value| send("#{key}_option").user_value = user_value }
@@ -52,6 +54,11 @@ module Aranha
         define_method("#{key}_option") do
           options[key] ||= ::Aranha::Selenium::DriverOptions::Option.new(self, key, option_proc)
         end
+      end
+
+      # @return [Hash]
+      def to_h
+        options.values.reject { |opt| opt.user_value.nil? }.to_h { |opt| [opt.key, opt.user_value] }
       end
 
       private

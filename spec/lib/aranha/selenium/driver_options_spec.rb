@@ -32,4 +32,12 @@ RSpec.describe Aranha::Selenium::DriverOptions do
       it { expect(instance.headless).to be(true) }
     end
   end
+
+  describe '#to_h' do
+    let(:instance) { described_class.new(headless: true, user_agent: 'ABC') }
+
+    it do
+      expect(instance.to_h).to eq(headless: true, user_agent: 'ABC')
+    end
+  end
 end
