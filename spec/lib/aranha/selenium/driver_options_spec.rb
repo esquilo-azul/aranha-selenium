@@ -33,6 +33,18 @@ RSpec.describe Aranha::Selenium::DriverOptions do
     end
   end
 
+  describe '#merge' do
+    let(:instance) { described_class.new(headless: true, user_agent: 'ABC') }
+    let(:other) { described_class.new(headless: false) }
+    let(:result) do
+      described_class.new(headless: false, user_agent: 'ABC')
+    end
+
+    it do
+      expect(instance.merge(other.to_h)).to eq(result.to_h)
+    end
+  end
+
   describe '#to_h' do
     let(:instance) { described_class.new(headless: true, user_agent: 'ABC') }
 

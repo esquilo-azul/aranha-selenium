@@ -56,6 +56,12 @@ module Aranha
         end
       end
 
+      # @param other [Aranha::Selenium::DriverOptions]
+      # @return [Aranha::Selenium::DriverOptions]
+      def merge(other)
+        self.class.assert(to_h.merge(other.to_h))
+      end
+
       # @return [Hash]
       def to_h
         options.values.reject { |opt| opt.user_value.nil? }.to_h { |opt| [opt.key, opt.user_value] }
