@@ -42,7 +42,9 @@ module Aranha
 
       # @return [Aranha::Selenium::DriverOptions]
       def driver_options
-        ::Aranha::Selenium::DriverOptions.assert(options.except(:driver))
+        ::Aranha::Selenium::DriverOptions.default.merge(
+          ::Aranha::Selenium::DriverOptions.assert(options.except(:driver))
+        )
       end
 
       require_sub __FILE__
