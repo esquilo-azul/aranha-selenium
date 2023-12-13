@@ -3,7 +3,7 @@
 require 'aranha/selenium/driver_options'
 
 RSpec.describe Aranha::Selenium::DriverOptions do
-  let(:instance) { described_class.instance }
+  let(:instance) { described_class.default }
 
   describe '#headless' do
     it { expect(instance.headless).to be(false) }

@@ -17,8 +17,8 @@ module Aranha
         end
 
         # @return [Aranha::Selenium::DriverOptions]
-        def instance
-          @instance ||= new
+        def default
+          @default ||= new
         end
       end
 
