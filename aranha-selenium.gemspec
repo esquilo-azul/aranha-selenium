@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.authors     = ['Esquilo Azul Company']
   s.summary     = 'Selenium\' utilities for Ruby.'
 
-  s.files = Dir['{lib}/**/*', 'Gemfile']
+  s.files = Dir['{lib,template}/**/*', 'Gemfile']
   s.required_ruby_version = '>= 2.7'
 
   s.add_dependency 'eac_fs', '~> 0.17'

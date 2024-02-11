@@ -8,7 +8,7 @@ require 'selenium-webdriver'
 module Aranha
   module Selenium
     class Session < ::SimpleDelegator
-      require_sub __FILE__, include_modules: true
+      require_sub __FILE__, include_modules: true, require_mode: :kernel
       enable_simple_cache
 
       def initialize(options = {})
