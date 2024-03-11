@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'aranha/selenium/driver_options'
+require 'aranha/selenium/executables'
 require 'eac_ruby_utils/core_ext'
 
 module Aranha
@@ -11,6 +12,11 @@ module Aranha
           new(options).create_driver
         end
       end
+
+      DRIVERS = {
+        chrome: :chromedriver,
+        firefox: :geckodriver
+      }.freeze
 
       # @!attribute [r] options
       #   @return [ActiveSupport::HashWithIndifferentAccess]
@@ -37,7 +43,11 @@ module Aranha
       end
 
       def default_driver_name
-        :firefox
+        DRIVERS.each do |driver, executable|
+          return driver if ::Aranha::Selenium::Executables.send(executable).exist?
+        end
+
+        raise "No driver found (#{DRIVERS.value.join(', ')})"
       end
 
       # @return [Aranha::Selenium::DriverOptions]
