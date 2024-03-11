@@ -23,18 +23,30 @@ module Aranha
       end
 
       enable_listable
+      lists.add_symbol :headless, :auto, :no, :yes
       lists.add_symbol :option, :accept_insecure_certs, :downloads_dir, :headless, :profile_dir,
                        :profile_name, :user_agent
       BOOLEAN_OPTIONS = [OPTION_ACCEPT_INSECURE_CERTS, OPTION_HEADLESS].freeze
 
       DEFAULT_DOWNLOADS_DIR = ::File.join(::Dir.tmpdir, 'aranha_downloads_dir')
       DEFAULT_ACCEPT_INSECURE_CERTS = false
-      DEFAULT_HEADLESS = false
+      DEFAULT_HEADLESS = HEADLESS_AUTO
       DEFAULT_PROFILE_DIR = nil
       DEFAULT_PROFILE_NAME = nil
       DEFAULT_USER_AGENT = nil
 
-      OPTIONS_SANITIZERS = {}.freeze
+      HEADLESS_AUTO_ENVVAR = 'DISPLAY'
+
+      OPTIONS_SANITIZERS = {
+        headless: lambda { |value|
+          case value
+          when HEADLESS_AUTO then ENV[HEADLESS_AUTO_ENVVAR].blank?
+          when HEADLESS_NO then false
+          when HEADLESS_YES then true
+          else value.to_bool
+          end
+        }
+      }.freeze
 
       # @param user_values [Hash]
       def initialize(user_values = {})
