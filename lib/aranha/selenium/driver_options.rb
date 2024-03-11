@@ -34,6 +34,8 @@ module Aranha
       DEFAULT_PROFILE_NAME = nil
       DEFAULT_USER_AGENT = nil
 
+      OPTIONS_SANITIZERS = {}.freeze
+
       # @param user_values [Hash]
       def initialize(user_values = {})
         user_values.each { |k, v| send("#{k}=", v) }
@@ -45,9 +47,9 @@ module Aranha
         define_method(key) { send("#{key}_option").value }
         define_method("#{key}=") { |user_value| send("#{key}_option").user_value = user_value }
 
-        option_proc = nil
+        option_proc = OPTIONS_SANITIZERS[key]
         if BOOLEAN_OPTIONS.include?(key)
-          option_proc = proc { |v| ::EacRubyUtils::Boolean.parse(v) }
+          option_proc = proc { |v| ::EacRubyUtils::Boolean.parse(v) } if option_proc.blank?
           define_method("#{key}?") { send(key) }
         end
 
