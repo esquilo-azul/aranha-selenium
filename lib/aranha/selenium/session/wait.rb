@@ -28,11 +28,11 @@ module Aranha
           wait.until { find_element(find_element_args) }
         end
 
-        def wait_for_download
+        def wait_for_download(timeout = nil)
           initial_downloads = downloads.current
           yield
           new_downloads = []
-          wait.until do
+          wait(timeout).until do
             new_downloads = downloads.current - initial_downloads
             new_downloads.any?
           end
