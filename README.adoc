@@ -1,0 +1,51 @@
+= Aranha Selenium
+
+== Instalação
+
+[source,shell]
+....
+gem install aranha-selenium
+....
+
+Cada navegador depende de um executável específico no PATH. Os navegadores suportados:
+
+|===
+| Navegador | Executável | Ubuntu 22.04 (apt-get install <PACKAGE>)
+
+| Chrome
+| `+chromedriver+`
+| `+chromium-chromedriver+`
+
+| Firefox
+| `+geckodriver+`
+| `+firefox-geckodriver+`
+|===
+
+=== Instalação de `+firefox-geckodriver+` em Ubuntu 22.04
+
+Copie o código abaixo para um arquivo (Ex.: `+geckodriver_installer.sh+`) e execute (`+bash geckodriver_installer.sh+`):
+
+[source,shell]
+....
+#!/bin/bash
+
+set -u
+set -e
+
+function sudo_template_file_apply_from_variable() {
+  echo "$1" | sudo tee "$2"
+}
+
+sudo add-apt-repository --yes ppa:mozillateam/ppa
+
+PREFERENCE='Package: *
+Pin: release o=LP-PPA-mozillateam
+Pin-Priority: 1001
+'
+sudo_template_file_apply_from_variable "$PREFERENCE" '/etc/apt/preferences.d/firefox.pref'
+
+UPGRADES='Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";'
+sudo_template_file_apply_from_variable "$UPGRADES" '/etc/apt/apt.conf.d/51unattended-upgrades-firefox'
+
+sudo apt-get install firefox-geckodriver
+....
