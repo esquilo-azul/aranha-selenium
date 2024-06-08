@@ -32,6 +32,11 @@ module Aranha
         @downloads ||= ::Aranha::Selenium::Session::Downloads.new
       end
 
+      # @return [Aranha::Selenium::Session::Element]
+      def element(*find_args)
+        ::Aranha::Selenium::Session::Element.new(self, find_args)
+      end
+
       private
 
       def element_click(element)
