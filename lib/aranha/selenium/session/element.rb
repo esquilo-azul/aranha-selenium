@@ -22,6 +22,26 @@ module Aranha
 
           session.__getobj__.find_element(*find_args)
         end
+
+        # @param session_wait_args [Array] Arguments for +Aranha::Selenium::Session::Wait.wait+.
+        # @return [self]
+        def wait_click(*session_wait_args)
+          session.wait(*session_wait_args).until do
+            find.if_present(nil) { |v| element_click(v) }
+          end
+          self
+        end
+
+        protected
+
+        def element_click(element)
+          element.click
+          element
+        rescue ::Selenium::WebDriver::Error::ElementClickInterceptedError,
+               ::Selenium::WebDriver::Error::ElementNotInteractableError,
+               ::Selenium::WebDriver::Error::StaleElementReferenceError
+          nil
+        end
       end
     end
   end

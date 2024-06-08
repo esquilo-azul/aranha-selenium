@@ -36,17 +36,6 @@ module Aranha
       def element(*find_args)
         ::Aranha::Selenium::Session::Element.new(self, find_args)
       end
-
-      private
-
-      def element_click(element)
-        element.click
-        element
-      rescue ::Selenium::WebDriver::Error::ElementClickInterceptedError,
-             ::Selenium::WebDriver::Error::ElementNotInteractableError,
-             ::Selenium::WebDriver::Error::StaleElementReferenceError
-        nil
-      end
     end
   end
 end
