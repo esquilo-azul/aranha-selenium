@@ -7,11 +7,11 @@ module Aranha
   module Selenium
     class Session < ::SimpleDelegator
       module Find
-        # @return [Selenium::WebDriver::Element, nil]
-        def find_element(*args, &block)
-          return args.first if args.count >= 1 && args.first.is_a?(::Selenium::WebDriver::Element)
-
-          __getobj__.find_element(*args, &block)
+        # @param find_element_args [Array] Argujments for +Selenium::WebDriver::Find.find_element+.
+        # @return [Selenium::WebDriver::Element]
+        # @raise [Selenium::WebDriver::Error::NoSuchElementError]
+        def find_element(*find_element_args)
+          element(*find_element_args).find!
         end
 
         # @param find_element_args [Array] Argujments for +Selenium::WebDriver::Find.find_elements+.
