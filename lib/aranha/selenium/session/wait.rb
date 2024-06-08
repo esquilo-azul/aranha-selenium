@@ -20,8 +20,8 @@ module Aranha
         # @param find_element_args [Array] Argujments for +Selenium::WebDriver::Find.find_element+.
         # @param timeout [Integer]
         # @return [Selenium::WebDriver::Element]
-        def wait_for_click(find_element_args, timeout = nil)
-          element(*find_element_args).wait_for_click(timeout).find!
+        def wait_for_click(find_element_args, timeout = nil, &block)
+          element(*find_element_args).wait_for_click(timeout, &block).find!
         end
 
         def wait_for_element(find_element_args)

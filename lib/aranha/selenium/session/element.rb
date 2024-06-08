@@ -25,8 +25,9 @@ module Aranha
 
         # @param session_wait_args [Array] Arguments for +Aranha::Selenium::Session::Wait.wait+.
         # @return [self]
-        def wait_click(*session_wait_args)
+        def wait_click(*session_wait_args, &block)
           session.wait(*session_wait_args).until do
+            block.if_present(&:call)
             find.if_present(nil) { |v| element_click(v) }
           end
           self
