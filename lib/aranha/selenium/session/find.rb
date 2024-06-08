@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'aranha/selenium/session/element'
 require 'selenium-webdriver'
 
 module Aranha
@@ -13,9 +14,11 @@ module Aranha
           __getobj__.find_element(*args, &block)
         end
 
+        # @param find_element_args [Array] Argujments for +Selenium::WebDriver::Find.find_elements+.
+        # @deprecated Use +{#element}.find+ instead.
+        # @return [Selenium::WebDriver::Element, nil]
         def find_or_not_element(find_element_args)
-          r = find_elements(find_element_args)
-          r.any? ? r.first : nil
+          element(*find_element_args).find
         end
       end
     end

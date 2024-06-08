@@ -7,6 +7,12 @@ module Aranha
     class Session < ::SimpleDelegator
       class Element
         common_constructor :session, :find_args
+
+        # @return [Selenium::WebDriver::Element, nil]
+        def find
+          r = session.find_elements(*find_args)
+          r.any? ? r.first : nil
+        end
       end
     end
   end
