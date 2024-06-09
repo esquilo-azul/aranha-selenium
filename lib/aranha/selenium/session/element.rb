@@ -8,6 +8,17 @@ module Aranha
       class Element
         common_constructor :session, :find_args
 
+        # @return [self]
+        # @raise [Selenium::WebDriver::Error::ElementClickInterceptedError]
+        # @raise [Selenium::WebDriver::Error::ElementNotInteractableError]
+        # @raise [Selenium::WebDriver::Error::NoSuchElementError]
+        # @raise [Selenium::WebDriver::Error::StaleElementReferenceError]
+        def click!
+          find!.click
+
+          self
+        end
+
         # @return [Selenium::WebDriver::Element, nil]
         def find
           r = session.find_elements(*find_args)
@@ -28,16 +39,15 @@ module Aranha
         def wait_click(*session_wait_args, &block)
           session.wait(*session_wait_args).until do
             block.if_present(&:call)
-            find.if_present(nil) { |v| element_click(v) }
+            find.if_present(nil) { |_v| element_click }
           end
           self
         end
 
         protected
 
-        def element_click(element)
-          element.click
-          element
+        def element_click
+          click!.find!
         rescue ::Selenium::WebDriver::Error::ElementClickInterceptedError,
                ::Selenium::WebDriver::Error::ElementNotInteractableError,
                ::Selenium::WebDriver::Error::StaleElementReferenceError
