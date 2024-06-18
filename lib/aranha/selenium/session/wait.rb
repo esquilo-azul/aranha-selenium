@@ -20,8 +20,10 @@ module Aranha
         # @param find_element_args [Array] Argujments for +Selenium::WebDriver::Find.find_element+.
         # @param timeout [Integer]
         # @return [Selenium::WebDriver::Element]
+        # @deprecated Use +element.wait_click+ instead.
         def wait_for_click(find_element_args, timeout = nil, &block)
-          element(*find_element_args).wait_for_click(timeout, &block).find!
+          find_element_args = [find_element_args] if find_element_args.is_a?(::Hash)
+          element(*find_element_args).wait_click(timeout, &block)
         end
 
         def wait_for_element(find_element_args)
