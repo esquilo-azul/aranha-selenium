@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'aranha/selenium/session/downloads'
-
 RSpec.describe Aranha::Selenium::Session::Downloads do
   let(:instance) { described_class.new }
   let(:file_path) { instance.dir.join('stub_file') }

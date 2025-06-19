@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'aranha/selenium/session'
-
 RSpec.describe Aranha::Selenium::Session do
   around do |example|
     StubWebServer.open do |server|

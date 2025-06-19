@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'aranha/selenium/session/element'
 require 'selenium-webdriver'
 
 module Aranha

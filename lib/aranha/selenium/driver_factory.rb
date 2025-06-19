@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-require 'aranha/selenium/driver_options'
-require 'aranha/selenium/executables'
-require 'eac_ruby_utils/core_ext'
-
 module Aranha
   module Selenium
     class DriverFactory

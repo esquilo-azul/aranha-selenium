@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'eac_ruby_utils/boolean'
-require 'eac_ruby_utils/core_ext'
 require 'tmpdir'
 
 module Aranha
