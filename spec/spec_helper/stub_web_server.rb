@@ -22,7 +22,7 @@ class StubWebServer < StubServer
   OPTIONS = {}.freeze
 
   def self.open(&block)
-    super(PORT, REPLIES, OPTIONS, &block)
+    super(PORT, REPLIES, **OPTIONS, &block)
   end
 
   # @return [String]
