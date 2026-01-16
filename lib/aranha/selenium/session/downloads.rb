@@ -19,7 +19,14 @@ module Aranha
 
         # @return [Pathname]
         def dir
-          @dir ||= ::Dir.mktmpdir.to_pathname
+          @dir ||= build_temporary_directory
+        end
+
+        protected
+
+        # @return [Pathname]
+        def build_temporary_directory
+          ::Dir.mktmpdir.to_pathname
         end
       end
     end
