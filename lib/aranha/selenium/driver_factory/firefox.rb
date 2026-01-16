@@ -7,11 +7,7 @@ module Aranha
     class DriverFactory
       class Firefox < ::Aranha::Selenium::DriverFactory::Base
         def build
-          ::Selenium::WebDriver.for(
-            :firefox,
-            options: build_options,
-            desired_capabilities: build_capabilities
-          )
+          ::Selenium::WebDriver.for(:firefox, options: build_options)
         end
 
         private
@@ -22,27 +18,22 @@ module Aranha
           r
         end
 
-        def build_capabilities
-          caps = {}
-          caps[:accept_insecure_certs] = true if accept_insecure_certs?
-          ::Selenium::WebDriver::Remote::Capabilities.firefox(caps)
-        end
-
         def build_options
-          r = ::Selenium::WebDriver::Firefox::Options.new(args: build_args,
-                                                          prefs: build_preferences)
+          r = ::Selenium::WebDriver::Firefox::Options.new(args: build_args)
+          r.accept_insecure_certs = accept_insecure_certs?
           build_profile.if_present { |v| r.profile = v }
           r
         end
 
         def build_preferences
-          r = {
-            'browser.download.dir' => downloads_dir,
+          r = ::Selenium::WebDriver::Firefox::Profile.new
+          {
+            'browser.download.dir' => downloads_dir.to_path,
             'browser.download.folderList' => 2,
             'browser.download.start_downloads_in_tmp_dir' => true,
             'browser.helperApps.neverAsk.saveToDisk' => auto_download_mime_types.join(';'),
             'pdfjs.disabled' => true
-          }
+          }.each { |k, v| r[k] = v }
           r['general.useragent.override'] = user_agent if user_agent.present?
           r
         end
@@ -53,6 +44,8 @@ module Aranha
           elsif profile_dir.present?
             ::FileUtils.mkdir_p(profile_dir)
             ::Selenium::WebDriver::Firefox::Profile.new(profile_dir)
+          else
+            build_preferences
           end
         end
 
