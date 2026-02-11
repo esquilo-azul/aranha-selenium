@@ -9,3 +9,5 @@ module Aranha
 end
 
 require 'aranha'
+require 'eac_fs'
+require 'eac_templates'
