@@ -52,8 +52,6 @@ module Aranha
           ::Aranha::Selenium::DriverOptions.assert(options.except(:driver))
         )
       end
-
-      require_sub __FILE__
     end
   end
 end

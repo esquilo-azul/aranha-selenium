@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'eac_templates/core_ext'
-
 module Aranha
   module Selenium
     class Session < ::SimpleDelegator
@@ -31,8 +29,6 @@ module Aranha
         def script_fields_arg
           "{#{fields.map(&:to_js_object).join(', ')}}"
         end
-
-        require_sub __FILE__
       end
     end
   end

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'eac_fs/file_info'
-
 require 'tmpdir'
 
 module Aranha
