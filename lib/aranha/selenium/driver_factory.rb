@@ -14,13 +14,17 @@ module Aranha
         firefox: :geckodriver
       }.freeze
 
+      attr_reader :driver_name_from_options
+
       # @!attribute [r] options
-      #   @return [ActiveSupport::HashWithIndifferentAccess]
+      #   @return [Aranha::Selenium::DriverOptions]
 
       # @!method initialize(options)
       #   @param options [ActiveSupport::HashWithIndifferentAccess]
       common_constructor :options do
-        self.options = options.with_indifferent_access.freeze
+        self.options = options.with_indifferent_access
+        self.driver_name_from_options = options.delete(:driver)
+        self.options = ::Aranha::Selenium::DriverOptions.assert(options)
       end
 
       def create_driver
@@ -28,7 +32,7 @@ module Aranha
       end
 
       def driver_name
-        (options[:driver] || default_driver_name).to_s
+        (driver_name_from_options || default_driver_name).to_s
       end
 
       def driver_class
@@ -48,10 +52,12 @@ module Aranha
 
       # @return [Aranha::Selenium::DriverOptions]
       def driver_options
-        ::Aranha::Selenium::DriverOptions.default.merge(
-          ::Aranha::Selenium::DriverOptions.assert(options.except(:driver))
-        )
+        ::Aranha::Selenium::DriverOptions.default.merge(options)
       end
+
+      protected
+
+      attr_writer :driver_name_from_options
     end
   end
 end
