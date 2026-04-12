@@ -9,10 +9,7 @@ module Aranha
         end
       end
 
-      DRIVERS = {
-        chrome: :chromedriver,
-        firefox: :geckodriver
-      }.freeze
+      DRIVERS = %i[chrome firefox].freeze
 
       attr_reader :driver_name_from_options
 
@@ -29,21 +26,22 @@ module Aranha
 
       # @return [Aranha::Selenium::DriverFactory::Base]
       def create_driver
-        create_specified_driver(driver_name, options)
+        if driver_name_from_options.present?
+          create_specified_driver(driver_name_from_options, options)
+        else
+          create_unspecified_driver
+        end
       end
 
-      # @return [String]
-      def driver_name
-        (driver_name_from_options || default_driver_name).to_s
-      end
-
-      # @return [String]
-      def default_driver_name
-        DRIVERS.each do |driver, executable|
-          return driver if ::Aranha::Selenium::Executables.send(executable).exist?
+      # @return [Aranha::Selenium::DriverFactory::Base]
+      def create_unspecified_driver
+        DRIVERS.each do |e|
+          return create_specific_driver(e, options)
+        rescue Selenium::WebDriver::Error::SessionNotCreatedError
+          # do nothing
         end
 
-        raise "No driver found (#{DRIVERS.value.join(', ')})"
+        raise "No driver available (Tried: #{DRIVERS.join(', ')})"
       end
 
       protected
