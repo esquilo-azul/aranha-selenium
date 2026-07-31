@@ -36,7 +36,7 @@ module Aranha
       # @return [Aranha::Selenium::DriverFactory::Base]
       def create_unspecified_driver
         DRIVERS.each do |e|
-          return create_specific_driver(e, options)
+          return create_specified_driver(e, options)
         rescue Selenium::WebDriver::Error::SessionNotCreatedError
           # do nothing
         end
