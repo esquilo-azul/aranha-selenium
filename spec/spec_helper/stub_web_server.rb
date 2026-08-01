@@ -20,8 +20,8 @@ class StubWebServer < StubServer
   }.freeze
   OPTIONS = {}.freeze
 
-  def self.open(&block)
-    super(PORT, REPLIES, **OPTIONS, &block)
+  def self.open(&)
+    super(PORT, REPLIES, **OPTIONS, &)
   end
 
   # @return [String]
