@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'aranha', '~> 0.20', '>= 0.20.1'
   s.add_dependency 'eac_fs', '~> 0.20', '>= 0.20.2'
-  s.add_dependency 'eac_ruby_utils', '~> 0.131', '>= 0.131.4'
+  s.add_dependency 'eac_ruby_base1', '~> 0.1', '>= 0.1.1'
   s.add_dependency 'eac_templates', '~> 0.9'
   s.add_dependency 'rexml', '~> 3.4', '>= 3.4.4'
   s.add_dependency 'selenium-webdriver', '~> 4.44'
