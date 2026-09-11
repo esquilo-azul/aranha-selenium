@@ -21,7 +21,8 @@ module Aranha
 
         def chrome_arguments
           r = %w[--disable-popup-blocking --disable-translate
-                 --disable-blink-features=AutomationControlled]
+                 --disable-blink-features=AutomationControlled --no-sandbox
+                 --disable-dev-shm-usage]
           r << '--ignore-certificate-errors' if accept_insecure_certs?
           r << '--headless' if headless?
           r << "--user-agent=#{user_agent}" if user_agent.present?
