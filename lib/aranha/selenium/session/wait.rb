@@ -8,9 +8,12 @@ module Aranha
       module Wait
         WAIT_DEFAULT_TIMEOUT = 15
 
-        def wait(timeout = nil)
+        # @param timeout [Integer, nil]
+        # @param options [Hash] Additional options for +Selenium::WebDriver::Wait.new+.
+        # @return [Selenium::WebDriver::Wait]
+        def wait(timeout = nil, options = {})
           timeout ||= wait_default_timeout
-          ::Selenium::WebDriver::Wait.new(timeout: timeout)
+          ::Selenium::WebDriver::Wait.new(options.merge(timeout: timeout))
         end
 
         def wait_default_timeout
