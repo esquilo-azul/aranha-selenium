@@ -32,6 +32,14 @@ module Aranha
       def element(*find_args)
         ::Aranha::Selenium::Session::Element.new(self, find_args)
       end
+
+      # @yieldparam session [Aranha::Selenium::Session]
+      # @return [Object]
+      def quit_on_end
+        yield(self)
+      ensure
+        quit
+      end
     end
   end
 end
