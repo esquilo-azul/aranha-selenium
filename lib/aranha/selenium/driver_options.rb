@@ -22,13 +22,14 @@ module Aranha
 
       enable_listable
       lists.add_symbol :headless, :auto, :no, :yes
-      lists.add_symbol :option, :accept_insecure_certs, :downloads_dir, :headless, :profile_dir,
-                       :profile_name, :user_agent
+      lists.add_symbol :option, :accept_insecure_certs, :downloads_dir, :headless,
+                       :page_load_strategy, :profile_dir, :profile_name, :user_agent
       BOOLEAN_OPTIONS = [OPTION_ACCEPT_INSECURE_CERTS, OPTION_HEADLESS].freeze
 
       DEFAULT_DOWNLOADS_DIR = ::File.join(::Dir.tmpdir, 'aranha_downloads_dir')
       DEFAULT_ACCEPT_INSECURE_CERTS = false
       DEFAULT_HEADLESS = HEADLESS_AUTO
+      DEFAULT_PAGE_LOAD_STRATEGY = nil
       DEFAULT_PROFILE_DIR = nil
       DEFAULT_PROFILE_NAME = nil
       DEFAULT_USER_AGENT = nil

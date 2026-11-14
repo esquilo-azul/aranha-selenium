@@ -17,6 +17,7 @@ module Aranha
           chrome_arguments.each { |arg| r.add_argument(arg) }
           r.add_preference(:download, prompt_for_download: false,
                                       default_directory: downloads_dir.to_path)
+          r.page_load_strategy = page_load_strategy if page_load_strategy.present?
           r
         end
 

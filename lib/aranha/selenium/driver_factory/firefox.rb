@@ -21,6 +21,7 @@ module Aranha
         def build_options
           r = ::Selenium::WebDriver::Firefox::Options.new(args: build_args)
           r.accept_insecure_certs = accept_insecure_certs?
+          r.page_load_strategy = page_load_strategy if page_load_strategy.present?
           build_profile.if_present { |v| r.profile = v }
           r
         end
