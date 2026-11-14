@@ -36,6 +36,7 @@ module Aranha
       HEADLESS_AUTO_ENVVAR = 'DISPLAY'
 
       OPTIONS_SANITIZERS = {
+        downloads_dir: ->(value) { value.to_pathname },
         headless: lambda { |value|
           case value
           when HEADLESS_AUTO then ENV[HEADLESS_AUTO_ENVVAR].blank?

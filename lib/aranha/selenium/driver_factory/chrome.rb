@@ -15,7 +15,8 @@ module Aranha
         def chrome_options
           r = ::Selenium::WebDriver::Chrome::Options.new
           chrome_arguments.each { |arg| r.add_argument(arg) }
-          r.add_preference(:download, prompt_for_download: false, default_directory: downloads_dir)
+          r.add_preference(:download, prompt_for_download: false,
+                                      default_directory: downloads_dir.to_path)
           r
         end
 
